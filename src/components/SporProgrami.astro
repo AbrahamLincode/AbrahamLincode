@@ -1,0 +1,98 @@
+---
+import 'tailwindcss/tailwind.css';
+---
+
+<section class="bg-white py-8" x-data="app()">
+    <div class="container mx-auto px-4">
+      <div class="w-full text-center pb-8">
+        <h2 class="font-semibold text-3xl">Spor Programı</h2>
+      </div>
+  
+      <div class="w-full text-center pb-8">
+        <h3 class="font-semibold text-xl">Tarih: <span x-text="currentDate"></span></h3>
+      </div>
+  
+
+      <div x-data="app()" class="w-full">
+        <div class="mb-4">
+          <select class="border p-2 rounded" x-model="aktiviteSec">
+            <option value="" selected disabled>Aktivite Seçin</option>
+            <template x-for="option in secenekler" :key="option">
+              <option :value="option" x-text="option"></option>
+            </template>
+          </select>
+          <input class="border p-2 rounded ml-4" type="number" placeholder="Süre (dk)" x-model="aktiviteSure">
+          <button class="bg-blue-500 text-white p-2 rounded ml-4" @click="aktiviteEkle()">Aktivite Ekle</button>
+        </div>
+        <div class="mb-4">
+          <input class="border p-2 rounded" type="text" placeholder="Yeni aktivite seçeneği" x-model="yeniSecenek">
+          <button class="bg-green-500 text-white p-2 rounded ml-4" @click="yeniSecenekEkle()">Seçenek Ekle</button>
+        </div>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-s text-sky-700 uppercase bg-white dark:bg-sky-700 dark:text-gray-100">
+              <tr>
+                <th class="border px-4 py-2 w-7">Tarih</th>
+                <th class="border px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white " scope="row">Aktivite Adı</th>
+                <th class="border px-4 py-2 w-6">Süre (dk)</th>
+                <th class="border px-4 py-2 w-6">Kaldır</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template x-for="(aktivite, index) in aktiviteler" :key="index">
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <td class="border px-4 py-2 " x-text="aktivite.date"></td>
+                  <td class="border px-4 py-2 " x-text="aktivite.ad"></td>
+                  <td class="border px-4 py-2" x-text="aktivite.duration"></td>
+                  <td class="border px-4 py-2">
+                    <button class="bg-red-500 text-white p-2 rounded" @click="aktiviteSilme(index)">Sil</button>
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+        </template>
+        </div>
+      </div>
+    </section>
+
+  <script>
+    import Alpine from 'alpinejs';
+  
+    const app = () => {
+      return {
+        aktiviteler: [],
+        aktiviteSure: '',
+        aktiviteSec: '',
+        secenekler: ['Yüzme', 'Koşu', 'Bisiklet', 'Yoga'],
+        yeniSecenek: '',
+        currentDate: new Date().toLocaleDateString(),
+  
+        aktiviteEkle() {
+          if (this.aktiviteSec && this.aktiviteSure) {
+            this.aktiviteler.push({ad: this.aktiviteSec, duration: this.aktiviteSure, date: this.currentDate});
+            this.aktiviteSec = '';
+            this.aktiviteSure = '';
+          }
+        },
+  
+        yeniSecenekEkle() {
+          if (this.yeniSecenek) {
+            this.secenekler.push(this.yeniSecenek);
+            this.yeniSecenek = '';
+          }
+        },
+  
+        aktiviteSilme(index) {
+          this.aktiviteler.splice(index, 1);
+        }
+      };
+    };
+  
+    Alpine.data('app', app);
+    Alpine.start();
+  </script>
+  
+  
+  
+  

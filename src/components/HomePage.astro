@@ -1,0 +1,21 @@
+---
+// İçe aktarılan modüller ve değişkenler burada tanımlanır
+import Card from './Card.astro';
+---
+
+<!-- Hizmetler componentinin özellikleri ve varsayılan değerleri -->
+<astro>
+  <style>
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+    }
+  </style>
+</astro>
+
+<!-- Componentin ana içeriği -->
+<section class={`services ${Astro.props.class}`}>
+  <slot></slot>
+</section>

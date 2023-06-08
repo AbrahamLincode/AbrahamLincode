@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HomePage from '../components/HomePage.astro';
+import Card from '../components/Card.astro'; // Card bileşenini içe aktarın
+
+---
+
+<Layout title="Welcome to Astro.">
+
+ <HomePage >
+    <Card title="Diyetisyenim" description="Kişisel Diyetisyenlik Danışmanlığı" image="/images/nutrition.png" />
+    <Card title="Bilgilerim" description="Gelişiminizi Takip edip Edin" image="/images/nutrition.png" />
+    <Card title="Kalori Cetveli" description="Kalori Cetveli İle Öğünlerinizi Kontrol Edin" image="/images/nutrition.png" />
+    <Card title="Ektivite Cetveli" description="Aktivite Cetveli ile Spor Aktivitelerini Planla" image="/images/nutrition.png" />
+    <Card title="Tarifler" description="Tarifler ile Merak Ettiğin Tarifleri Ara" image="/images/nutrition.png" />
+
+
+ </HomePage>
+</Layout>

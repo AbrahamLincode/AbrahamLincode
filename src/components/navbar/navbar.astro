@@ -1,0 +1,89 @@
+---
+import Container from "../container.astro";
+import Link from "../ui/link.astro";
+import Dropdown from "./dropdown.astro";
+import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
+
+const menuitems = [
+{
+    title: "Bilgilerim",
+    path: "/bilgilerim",
+  },
+{
+    title: "Kalori Cetveli",
+    path: "/kaloriCetveli",
+  },
+  {
+    title: "Aktivite Cetveli",
+    path: "/aktiviteCetveli",
+  },
+  {
+    title: "Tarifler",
+    path: "/tarifler",
+  },
+  {
+    title: "Testler",
+    path: "#",
+    children: [
+      { title: "Beden Yaşını Test Et", path: "/" },
+      { title: "Yemek bağımlısı mısın?", path: "#" },
+      { title: "Etobur mu ? Otobur mu ?", path: "#" },
+      { title: "Tavsiyeye ihtiyacım var!", path: "/404" },
+    ],
+  },
+];
+---
+
+<Container>
+  <header class="flex flex-col lg:flex-row justify-between items-center my-5 ">
+    <Astronav>
+      <div class="flex w-full lg:w-auto items-center justify-between">
+        <a href="/" class="text-lg"
+          ><span class="font-bold text-emerald-800">Diyet</span><span
+            class="text-emerald-500">isyenim</span
+          >
+        </a>
+        <div class="block lg:hidden">
+          <MenuIcon class="w-4 h-4 text-sky-600" />
+        </div>
+      </div>
+      <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">
+        <ul class="flex flex-col lg:flex-row lg:gap-3">
+          {
+            menuitems.map((item, index) => (
+              <>
+                {item.children && (
+                  <Dropdown
+                    title={item.title}
+                    children={item.children}
+                    lastItem={index === menuitems.length - 1}
+                  />
+                )}
+
+                {!item.children && (
+                  <li>
+                    <a
+                      href={item.path}
+                      class="flex lg:px-3 py-2 text-emerald-800 hover:text-sky-500">
+                      {item.title}
+                    </a>
+                  </li>
+                )}
+              </>
+            ))
+          }
+        </ul>
+        <div class="lg:hidden flex items-center mt-3 gap-4">
+          <Link href="#" class="text-sky-500 hover:text-sky-700" style="muted" block size="md">Giriş</Link>
+          <Link href="#" class="bg-emerald-700 hover:bg-emerald-500 hover:text-black" size="md" block>Kayıt ol</Link>
+        </div>
+      </MenuItems>
+    </Astronav>
+    <div>
+      <div class="hidden lg:flex items-center gap-4">
+        <a href="#" class="font-semibold text-sky-700 hover:text-sky-500">Giriş</a>
+        <Link href="#" class=" bg-gradient-to-r from-sky-900 to-sky-700 hover:from-emerald-800 hover:to-emerald-700" size="md">Kayıt ol</Link>
+      </div>
+    </div>
+  </header>
+</Container>
