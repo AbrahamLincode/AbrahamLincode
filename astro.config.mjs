@@ -8,7 +8,4 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), alpinejs(), vue(), react()]
-  site: 'https://abrahamlincode.github.io',
-  base: '/nt_90210000187',
-
 });
